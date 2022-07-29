@@ -1,0 +1,29 @@
+Bean注解包含以下几类，Spring框架的容器会扫描这些class：
+1.@Controller
+2.@Service
+3.@Repository("alphaHibernate") （value,设定Bean的名字）
+    @Repository
+    @Primary    ：设定优先级
+4.以上三个注解都是由@Component注解实现
+
+
+Spring容器的实现类ApplicationContext，可以通过这个类获得容器，进而获取Bean
+容器在利用构造器创建Bean的过程中，可以通过注解，在Bean初始化前/后/销毁三个阶段做出信息，分别对应以下三个注解
+@ProConstruct
+@PostConstruct
+@Destroy
+
+容器创建Bean默认是单例的，即默认在@Component注解下存在
+@Component
+@Scope("singleton")
+如果想要破坏单例模式
+@Component
+@Scope("prototype")
+
+希望通过Spring装载第三方的类，可以通过编写配置类实现，详情见AlphaConfig类
+@Configuration表示这个是配置类
+@Bean注解方法表示，会将方法返回的名叫"simpleDateFormat"的SimpleDateFormat类，将被装配到容器中。
+
+Spring容器依赖注入，@AutoWired注解将Bean注入到类中
+@AutoWired
+@Qualifier("name")  :指定Bean名字
